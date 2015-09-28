@@ -1,3 +1,5 @@
+# This is essentially the Normal mode, 2 player or basic computer.
+
 require "pry"
 WINNERS = [
 	[0,1,2],[2,5,8],[6,7,8],[0,3,6],
