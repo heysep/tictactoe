@@ -104,7 +104,6 @@ def tictactoe
 	mark = "O"
 
 	until game_over?(board, mark)
-
 		if player == p2
 			player = p1 
 			mark = "X"
