@@ -1,4 +1,4 @@
-# This is a 2 player version by our instructor, Brit.
+
 
 WINS = [
 	[0,1,2],[2,5,8],[6,7,8],[0,3,6],
@@ -11,6 +11,16 @@ def show_board(board)
 		| #{board[3]} | #{board[4]} | #{board[5]} |
 		| #{board[6]} | #{board[7]} | #{board[8]} |
 	"
+end
+
+def choose_mode
+	puts "Do you want computer mode? y/n?"
+	result = gets.chomp.downcase
+	until ['y', 'n'].include?(result)
+		puts "Enter 'y' for computer mode, 'n' for 2 player. "
+		result = gets.chomp.downcase
+	end
+	return "cpu" if result == "y"
 end
 
 def choose_player
@@ -66,15 +76,84 @@ def finito(board, player)
 	show_board(board)
 end
 
+def get_possible_board(board, move, player)
+	board.map { |position| position = position == move ? player : position }
+end
+
+def get_score(board, depth, player)
+	if win?(board) && player == "O"
+		return 10 - depth
+	elsif win?(board) && player == "X"
+		return depth - 10
+	else
+		return 0
+	end
+end
+
+def minimax(board, depth, player)
+	return get_score(board, depth, player) if game_over?(board)
+
+	depth += 1
+	scores = []
+	moves = []
+
+	# this keeps track of a scores and corresponding moves matched with index
+	available_moves(board).each do |move| 
+		possible_board = get_possible_board(board, move, player)
+		scores.push minimax(possible_board, depth, player)
+		moves.push move
+	end
+
+	if player == "X"
+		max_score_index = scores.each_with_index.max[1]
+		choice = moves[max_score_index]
+		return choice
+	else
+		min_score_index = scores.each_with_index.min[1]
+		choice = moves[min_score_index]
+		return choice
+	end
+end
+
+
 def tic_tac_toe 
 	board = (1..9).to_a
-	player = choose_player
+	mode = choose_mode
+	depth = 0
+
+	if mode == "cpu"
+		puts "You will play as 'X', \n Computer is 'O'."
+		player = "O"
+	else 
+		player = choose_player
+	end
+
 	until game_over?(board)
 		puts "\n== It's #{player}'s turn now. =="
-		move = take_turn(board)
+		if mode == "cpu" && player == "O"
+			move = minimax(board, depth, player)
+		else
+			move = take_turn(board)
+		end
+
 		board[move-1] = player
 		player = switch_player(player)
 	end
+
 	finito(board, player)
 end
+
 tic_tac_toe
+
+
+
+
+
+
+
+
+
+
+
+
+
