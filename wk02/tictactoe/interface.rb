@@ -2,6 +2,7 @@ require "pry"
 require	"./human"
 require "./computer"
 require "./game"
+require "./board"
 
 
 puts "
@@ -35,7 +36,9 @@ else
 end
 puts "Player 1 is #{@player1.mark}. Player 2 is #{@player2.mark}."
 
-@game = Game.new(@player1, @player2)
+@board = Board.new
+
+@game = Game.new(@player1, @player2, @board)
 
 @game.play
 
