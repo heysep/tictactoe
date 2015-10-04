@@ -37,7 +37,7 @@ class Game
 			score_index = case @player.mark
 				when "X" then 0
 				when "O" then 1
-				else 3
+				else 2
 			end
 			@score.update(score_index)
 			puts "Game is over. Who won? "

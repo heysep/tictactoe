@@ -5,13 +5,7 @@ require "./game"
 require "./board"
 require "./score"
 
-def replay?
-	replay = ""
-	until replay == "no" || replay == "yes"
-		puts "Would you like to play?"
-		replay = gets.chomp
-	end
-	if replay == "yes"
+def choose_mode
 	puts "
 		Choose your mode: 
 			1. Human vs. Human
@@ -30,31 +24,48 @@ def replay?
 		"
 		@mode = gets.chomp.to_i
 	end
+end
 
+def set_players
 	if @mode == 1
 		@player1 = HumanPlayer.new("X")
 		@player2 = HumanPlayer.new("O")
 	elsif @mode == 2
 		@player1 = HumanPlayer.new("X")
 		@player2 = ComputerPlayer.new("O")
-	else
+	elsif @mode == 3
 		@player1 = ComputerPlayer.new("X")
 		@player2 = ComputerPlayer.new("O")
 	end
 	puts "Player 1 is #{@player1.mark}. Player 2 is #{@player2.mark}."
+end
 
-	@board = Board.new
-
-	@game = Game.new(@player1, @player2, @board)
-
-	@game.play
-	replay?
+def replay?
+	replay = ""
+	until replay == "no" || replay == "yes"
+		puts "Would you like to play?"
+		replay = gets.chomp
+	end
+	if replay == "yes"
+		choose_mode
+		set_players
+		@board.reset!
+		@game.play
+		replay?
+	else
+		puts "Ending game... bye."
 	end
 end
 
+choose_mode
+set_players
+@board = Board.new
+@game = Game.new(@player1, @player2, @board)
+@game.play
 replay?
 
-binding.pry
+
+
 
 
 

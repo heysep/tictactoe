@@ -38,6 +38,9 @@ class Board
 		end
 	end
 
+	def reset!
+		@board = (1..9).to_a
+	end
 
 end
 
