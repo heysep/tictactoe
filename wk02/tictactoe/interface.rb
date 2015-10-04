@@ -3,6 +3,7 @@ require	"./human"
 require "./computer"
 require "./game"
 require "./board"
+require "./score"
 
 def replay?
 	replay = ""

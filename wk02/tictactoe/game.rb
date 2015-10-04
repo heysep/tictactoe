@@ -8,6 +8,7 @@ class Game
 		@player2 = player2
 		@board = board
 		@player = @player1
+		@score = Score.new
 	end
 
 	def play
@@ -32,14 +33,21 @@ class Game
 		end
 		
 		def finito
+			switch_player
+			score_index = case @player.mark
+				when "X" then 0
+				when "O" then 1
+				else 3
+			end
+			@score.update(score_index)
 			puts "Game is over. Who won? "
 			if @board.win?
-				switch_player
 				puts "#{@player.mark} has won!"
 			else
 				puts "Nobody won. It's a draw."
 			end
 			@board.display
+			@score.display
 		end
 
 		def switch_player
