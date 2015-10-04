@@ -11,7 +11,6 @@ class Game
 	end
 
 	def play
-		@move
 		until over?
 
 			@board.display
