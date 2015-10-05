@@ -10,6 +10,10 @@ class Board
 	attr_reader :board
 	def initialize
 		@board = (1..9).to_a
+		# n = n
+		# @board = (1..n*n).to_a
+		# WINS = build_wins(n) # this method builds the array of possible wins.
+
 	end
 
 	def display
