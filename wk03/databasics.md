@@ -1,14 +1,14 @@
 # Normal Mode - No Joins Required!
 
 - How many users are there?
-50
+	50
 
 - What are the 5 most expensive items?
-Small Cotton Gloves
-Small Wooden Computer
-Awesome Granite Pants
-Sleek Wooden Hat
-Ergonomic Steel Car
+	Small Cotton Gloves
+	Small Wooden Computer
+	Awesome Granite Pants
+	Sleek Wooden Hat
+	Ergonomic Steel Car
 
 - What's the cheapest book? (Does that change for "category is exactly 'book'" versus "category contains 'book'"?) 
 Using exactly "book" returns nothing as the term used is "books". Using LIKE "%book%" returns Ergonomic Granite Chair as the cheapest book.
