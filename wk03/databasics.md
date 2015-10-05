@@ -54,17 +54,17 @@
   - SELECT SUM(orders.quantity*items.price) AS "gross", items.category 
   - FROM orders INNER JOIN items ON orders.item_id=items.id 
   - GROUP BY items.category ORDER BY gross DESC LIMIT 3;
-
-  - 525240|Music, Sports & Clothing
-  - 449496|Beauty, Toys & Sports
-  - 448410|Sports
+  - Answer:
+    - 525240|Music, Sports & Clothing
+    - 449496|Beauty, Toys & Sports
+    - 448410|Sports
 
 - How much was spent on books?
 
   - SELECT SUM(orders.quantity*items.price) AS "total" FROM orders 
   - INNER JOIN items ON orders.item_id=items.id 
   - WHERE items.category LIKE "%book%";
-  - $1,081,352
+  - Answer: $1,081,352
 
 
 
