@@ -1,9 +1,11 @@
 # Normal Mode - No Joins Required!
 
 - How many users are there?
+  - SELECT COUNT(id) FROM users;
   - 50
 
 - What are the 5 most expensive items?
+  - SELECT title FROM items ORDER BY price DESC LIMIT 5;
   - Small Cotton Gloves
   - Small Wooden Computer
   - Awesome Granite Pants
@@ -11,19 +13,33 @@
   - Ergonomic Steel Car
 
 - What's the cheapest book? (Does that change for "category is exactly 'book'" versus "category contains 'book'"?) 
+  - SELECT title FROM items WHERE category LIKE "%book%" ORDER BY price ASC LIMIT 1;
+  - SELECT title FROM items WHERE category="book" ORDER BY price ASC LIMIT 1;
   - Using exactly "book" returns nothing as the term used is "books". Using LIKE "%book%" returns Ergonomic Granite Chair as the cheapest book.
 
 - Who lives at "6439 Zetta Hills, Willmouth, WY"? Do they have another address?
+  - SELECT users.first_name, users.last_name, users.id 
+  - FROM users INNER JOIN addresses
+  - ON users.id=addresses.user_id WHERE addresses.street="6439 Zetta Hills";  
+  - SELECT * FROM addresses WHERE user_id=40;
   - Corrine Little, her other address is: 54369 Wolff Forges, Lake Bryon, CA
 
 - Correct Virginie Mitchell's address to "New York, NY, 10108".
-  - Done.
+  - SELECT id FROM users WHERE first_name="Virginie" AND last_name="Mitchell"; 39
+  - UPDATE addresses
+  - SET street="567 Street", city="ATL", zip="30032"
+  - WHERE user_id=39 AND city="New York";
 - How many total items did we sell?
+  - SELECT SUM(quantity) FROM orders;
   - 2,125
 
 - Simulate buying an item by inserting a User for yourself and an Order for that User.
-  - USER: 51|Sepehr|Vakili|sdvakili@gmail.com
-  - ORDER: 378|51|15|5|2015-10-05
+  - INSERT INTO users (first_name, last_name, email)
+  - VALUES ("Sepehr", "Vakili", "sepehr@email.com");
+    - USER: 52|Sepehr|Vakili|sepehr@email.com
+  - INSERT INTO orders (user_id, item_id, quantity, created_at)
+  - VALUES (52, 3, 5, 2015-10-05);
+    - ORDER: 379|52|5|3|2015-10-05
 
 # Hard Mode - Joins, Summation, More Advanced Queries
 
