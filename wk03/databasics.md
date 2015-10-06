@@ -19,7 +19,8 @@
   ```
   SELECT title FROM items WHERE category LIKE "%book%" ORDER BY price ASC LIMIT 1;
   SELECT title FROM items WHERE category="book" ORDER BY price ASC LIMIT 1;
-  Using exactly "book" returns nothing as the term used is "books". Using LIKE "%book%" returns Ergonomic Granite Chair as the cheapest book.
+  Using exactly "book" returns nothing as the term used is "books". 
+  Using LIKE "%book%" returns Ergonomic Granite Chair as the cheapest book.
   ```
 
 - Who lives at "6439 Zetta Hills, Willmouth, WY"? Do they have another address?
@@ -85,7 +86,8 @@
 - What user spent the most?
   ```
   SELECT SUM(orders.quantity*items.price) AS total, orders.user_id, users.first_name, users.last_name
-  FROM orders INNER JOIN items, users ON orders.item_id=items.id AND orders.user_id=users.id GROUP BY orders.user_id ORDER BY total DESC LIMIT 1;
+  FROM orders INNER JOIN items, users ON orders.item_id=items.id AND orders.user_id=users.id 
+  GROUP BY orders.user_id ORDER BY total DESC LIMIT 1;
   Answer: 639386|19|Hassan|Runte
   ```
 
