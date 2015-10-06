@@ -1,17 +1,18 @@
 # Normal Mode - No Joins Required!
 
 - How many users are there?
-  - SELECT COUNT(id) FROM users;
+  ```SELECT COUNT(id) FROM users;```
   - 50
 
 - What are the 5 most expensive items?
-  - SELECT title FROM items ORDER BY price DESC LIMIT 5;
-  - Small Cotton Gloves
-  - Small Wooden Computer
-  - Awesome Granite Pants
-  - Sleek Wooden Hat
-  - Ergonomic Steel Car
-
+  ```
+  SELECT title FROM items ORDER BY price DESC LIMIT 5;
+  Small Cotton Gloves
+  Small Wooden Computer
+  Awesome Granite Pants
+  Sleek Wooden Hat
+  Ergonomic Steel Car
+  ```
 - What's the cheapest book? (Does that change for "category is exactly 'book'" versus "category contains 'book'"?) 
   - SELECT title FROM items WHERE category LIKE "%book%" ORDER BY price ASC LIMIT 1;
   - SELECT title FROM items WHERE category="book" ORDER BY price ASC LIMIT 1;
