@@ -44,42 +44,42 @@
 # Hard Mode - Joins, Summation, More Advanced Queries
 
 - How much would it cost to buy one of each tool?
-  - $467,488
+  'SELECT SUM(price) FROM items WHERE category LIKE "%tool%";'
+  - $46,477
 
 - What item was ordered most often? Grossed the most money?
   - Most often: 
-    - SELECT sum(orders.quantity) AS "sum", orders.item_id, items.title 
-    - FROM orders INNER JOIN items ON orders.item_id=items.id 
-    - GROUP BY orders.item_id ORDER BY sum DESC LIMIT 1;    
+    'SELECT sum(orders.quantity) AS "sum", orders.item_id, items.title 
+     FROM orders INNER JOIN items ON orders.item_id=items.id 
+     GROUP BY orders.item_id ORDER BY sum DESC LIMIT 1;'
     - Answer: 72|65|Incredible Granite Car
   - Grossed most:
-    - SELECT (orders.quantity * items.price) AS "gross", items.title, items.id 
-    - FROM orders INNER JOIN items ON orders.item_id=items.id 
-    - GROUP BY orders.item_id ORDER BY gross DESC LIMIT 5;  
-    - Answer: 90000|Incredible Steel Gloves|58
+    'SELECT SUM(orders.quantity * items.price) AS "gross", items.title, items.id
+     FROM orders INNER JOIN items ON orders.item_id=items.id 
+     GROUP BY orders.item_id ORDER BY gross DESC LIMIT 1;'
+    - Answer: 525240|Incredible Granite Car|65
 
 - What user spent the most?
 
-  - SELECT SUM(orders.quantity*items.price) AS "total", orders.user_id 
-  - FROM orders INNER JOIN items ON orders.item_id=items.id 
-  - GROUP BY orders.user_id ORDER BY total DESC LIMIT 5;
-  - Answer: 639386|19 then looking up user ID 19: Hassan|Runte
+  'SELECT SUM(orders.quantity*items.price) AS total, orders.user_id, users.first_name, users.last_name
+   ...> FROM orders INNER JOIN items, users ON orders.item_id=items.id AND orders.user_id=users.id GROUP BY orders.user_id ORDER BY total DESC LIMIT 1;'
+  - Answer: 639386|19|Hassan|Runte
 
 - What were the top 3 highest grossing categories?
 
-  - SELECT SUM(orders.quantity*items.price) AS "gross", items.category 
-  - FROM orders INNER JOIN items ON orders.item_id=items.id 
-  - GROUP BY items.category ORDER BY gross DESC LIMIT 3;
+  'SELECT SUM(orders.quantity*items.price) AS "gross", items.category 
+   FROM orders INNER JOIN items ON orders.item_id=items.id 
+   GROUP BY items.category ORDER BY gross DESC LIMIT 3;'
   - Answer:
-    - 525240|Music, Sports & Clothing
-    - 449496|Beauty, Toys & Sports
-    - 448410|Sports
+    '525240|Music, Sports & Clothing'
+    '449496|Beauty, Toys & Sports'
+    '448410|Sports'
 
 - How much was spent on books?
 
-  - SELECT SUM(orders.quantity*items.price) AS "total" FROM orders 
-  - INNER JOIN items ON orders.item_id=items.id 
-  - WHERE items.category LIKE "%book%";
+  'SELECT SUM(orders.quantity*items.price) AS "total" FROM orders 
+   INNER JOIN items ON orders.item_id=items.id 
+   WHERE items.category LIKE "%book%";'
   - Answer: $1,081,352
 
 
